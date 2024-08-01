@@ -1,59 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-  	<title>5032: The Falcons</title>
-    <link rel="icon" href="/images/Falcons_Main_Logo.png">
-	<style>
-    	body {
-          background-image:
-            linear-gradient(black, black),
-            url('/images/robot_close.png');
-          background-size:cover;
-          background-blend-mode: saturation;
-        }
-        ul {
-        	list-style-type:none;
-            margin:0px;
-            padding:0px;
-            overflow:hidden;
-            float:right;
-        }
-        
-    	li {
-        	float:left;
-        }
-        
-        li a {
-        	display:block;
-            color:white;
-            padding:16px;
-            text-decoration:none; 
-            text-align:centre;
-            background-color:#0D1D45;
-        }
-        
-        div {
-          background-color:#333333;
-        }
-   
 
-    </style>
-  </head>
-  <body>
- 	<ul>
-      <li><a href="#">Sponsors</a></li>
-      <li><a href="/robot.html">Robot</a></li>
-      <li><a href="/about.md">About</a></li>
- 	</ul>
+<!-- Copy and paste these 3 lines to get code highlighting using language-java class, example at bottom -->
+<link rel="stylesheet" href="/highlight/styles/default.css">
+<link rel="stylesheet" href="/styles/layout.css">
+<script src="/highlight/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+<head>
+    <title>5032 Programming</title>
+</head>
+
+<style>
+    .code_block {
+        border: 1px solid #ddd;
+        border-left: 3px solid #0D1D45;
+        page-break-inside: avoid;
+        max-width: 100%;
+        overflow: auto;
+        padding: 0px;
+        word-wrap: break-word;
+    } 
+</style>
+
+
+<body>
+    <h1>5032 Programming Resources</h1>
+    <ul class="ul_linklist">
+        <li class="li_linklist"><a href="/start/start_home.html">Starting a robot program</a></li>
+        <li class="li_linklist"><a href="#">Using Github</a></li>
+        <li class="li_linklist"><a href="/advanced/advanced_home.html">Advanced Programming</a></li>
+    </ul>
+    <div>
+
+    <pre>
+Example of code snippet:
+        <code class="language-java code_block">
+import edu.wpi.first.util.sendable.SendableRegistry;
+import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
+
+public class Robot extends TimedRobot {
+    private final CANSparkMax frontLeft = new CANSparkMax(4, MotorType.kBrushless);
+    private final CANSparkMax frontRight = new CANSparkMax(3, MotorType.kBrushless);
+    private final CANSparkMax rearLeft = new CANSparkMax(2, MotorType.kBrushless);
+    private final CANSparkMax rearRight = new CANSparkMax(1, MotorType.kBrushless);
+  
+    private final DifferentialDrive drive = new DifferentialDrive(frontLeft, frontRight);
+  
+    private final RelativeEncoder leftEncoder = frontLeft.getEncoder();
+    private final RelativeEncoder rightEncoder = frontRight.getEncoder();
+    private WPI_Pigeon2 gyro = new WPI_Pigeon2(6);
     
-    <br>
-	<div background-color="white">
-      <h1>5032 - The Falcons</h1>
-      <h2>Website</h2>
-      <p>About us: 
-          <button onclick="window.location='/about'";>Button</button>
-      </p>
+    private final XboxController controller = new XboxController(0);
+  
+    private PIDController pid = new PIDController(0.04, 0.005, 0);
+    private double distance = 0;
+    private double setpoint = 0;
+  
+    private PIDController gyroPID = new PIDController(0.04, 0.05, 0);
+  
+    private double kRevToWheel = 198/2108;
+    private double kRevToFeet = 1188 * Math.PI / 25296;
+        </code>
+    </pre>
     </div>
-    
-  </body>
-</html>
+    </body>
+
+</body>
