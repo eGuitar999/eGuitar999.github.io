@@ -16,6 +16,15 @@
     width: 100%;
 }
 
+.doc_eqv {
+    background: #fdebca;
+    border: 1px solid #ddd;
+    border-left: 3px solid #0D1D45;
+    width:fit-content;
+    padding: 5px;
+
+}
+
 .code_block {
     border: 1px solid #ddd;
     border-left: 3px solid #0D1D45;

@@ -106,12 +106,11 @@ private final CANSparkMax frontRightS = new CANSparkMax(8, MotorType.kBrushless)
                 <li>Back Right: 95.95</li>
             </ul>
         </p>
-    </div>
-    <button onclick="showCode('code2')">Show Code</button>
 
-    <div id="code2" style="display: none;">
-        <pre>
-            <code class="code_block">
+        <button onclick="showCode('code2')">Show Code (For #1,2,3)</button>
+
+        <div id="code2" style="display: none;">
+            <pre><code class="code_block">
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkAnalogSensor;
 
@@ -185,8 +184,56 @@ public double getSteeringEncoderDegree(RelativeEncoder encoder) {
 public double getSteeringEncoderDegree() {
     return Math.IEEEremainder(turningEncoder.getPosition(), 360);
 } 
-            </code>
-        </pre>
+            </code></pre>
+        </div>
+
+        <p style="padding-top: 10px;">
+            <strong>Task #4 (short): Make a velocity conversion factor</strong>
+            The default unit for velocity is RPM (rotations per minute).
+            As we already have a constant to convert rotations to whatever value we need, 
+            all we need to do now is convert minutes to seconds.
+        </p>
+
+        <div id="code3">
+            <pre><code class="code_block">
+public final double driveMotorRPMToMetresPerSecond = driveRotToMetre / 60.0;
+
+public final double turningMotorRPMToDegreePerSecond = turningRotToWheelDegree / 60.0;
+
+frontLeftDEncoder.setVelocityConversionFactor(driveMotorRPMToMetresPerSecond);
+frontRightDEncoder.setVelocityConversionFactor(driveMotorRPMToMetresPerSecond);
+backLeftDEncoder.setVelocityConversionFactor(driveMotorRPMToMetresPerSecond);
+backRightDEncoder.setVelocityConversionFactor(driveMotorRPMToMetresPerSecond);
+
+frontLeftSEncoder.setVelocityConversionFactor(turningMotorRPMToDegreePerSecond);
+frontRightSEncoder.setVelocityConversionFactor(turningMotorRPMToDegreePerSecond);
+backLeftSEncoder.setVelocityConversionFactor(turningMotorRPMToDegreePerSecond);
+backRightSEncoder.setVelocityConversionFactor(turningMotorRPMToDegreePerSecond);
+            </code></pre>
+        </div>
+
+        <p style="padding-top: 10px;">
+            <strong>Task #5 (short): Make and store variables for max speed</strong>
+            REV Robotics rates the max speed (free speed) of a NEO to be 5820 RPM. 
+            To get the max speed for driving, just use the velocity conversion factors already created. <br>
+            The max speed for rotating is more complicated, as it refered to the whole robot rotating instead of just one module.
+            Once I learn HTML enough to make diagrams I'll explain it better, for now just copy and paste the code.
+        </p>
+
+        <button onclick="showCode('code4')">Show Code</button>
+        <div id="code4" style="display: none;">
+            <pre><code class="code_block">
+public  final double neoFreeSpeedRPM = 5820;
+public  final double maxDriveSpeedMPS = neoFreeSpeedRPM * driveRPMToMetresPerSecond;
+
+public  final double kTrackwidth = Units.inchesToMeters(23.75);
+private final double rotDiameter = Math.sqrt(2 * kTrackwidth * kTrackwidth);
+private final double rotCircumference = rotDiameter * Math.PI;
+private final double secondsForOneRot = rotCircumference / maxDriveSpeedMPS;
+public  final double maxAngularSpeedRotPerSecond = 1.0 / secondsForOneRot;
+public  final double maxAngularSpeedRadiansPerSecond = maxAngularSpeedRotPerSecond * 2 * Math.PI;
+            </code></pre>
+        </div>
     </div>
 
     <div class="subsection">
