@@ -1,74 +1,72 @@
 <!DOCTYPE html>
 <html>
-<!-- Copy and paste these 3 lines to get code highlighting using language-java class, example at bottom -->
-<link rel="stylesheet" href="/highlight/styles/default.css">
-<script src="/highlight/highlight.min.js"></script>
-<script>hljs.highlightAll();</script>
-
-<link rel="stylesheet" href="/styles/layout.css">
-
 <head>
-    <title>5032 Programming Training</title>
+    <!-- Copy and paste these 3 lines to get code highlighting using language-java class, example at bottom -->
+    <link rel="stylesheet" href="/highlight/styles/default.css">
+    <script src="/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 
-    <style>
-        .code_block {
-            border: 1px solid #ddd;
-            border-left: 3px solid #0D1D45;
-            page-break-inside: avoid;
-            max-width: 100%;
-            overflow: auto;
-            padding: 0px;
-            word-wrap: break-word;
-        } 
-    </style>
+    <!-- Tailwind css -->
+    <link href="/src/output.css" rel="stylesheet">
+
+    <!-- Font -->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/6c14d65067.js" crossorigin="anonymous"></script>
+
+    <title></title>
 </head>
 
 <body>
-    <h1>5032 Programming Resources</h1>
-    <ul class="ul_linklist">
-        <li class="li_linklist"><a href="/start/start_home.html">Starting a robot program</a></li>
-        <li class="li_linklist"><a href="#">Using Github</a></li>
-        <li class="li_linklist"><a href="/advanced/advanced_home.html">Advanced Programming</a></li>
-        <li class="li_linklist"><a href="/swerve/swerve_home.html">Swerve</a></li>
-    </ul>
-
-    <div>
-    <pre>
-Example of code snippet:
-        <code class="language-java code_block">
-import edu.wpi.first.util.sendable.SendableRegistry;
-import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
-
-public class Robot extends TimedRobot {
-    private final CANSparkMax frontLeft = new CANSparkMax(4, MotorType.kBrushless);
-    private final CANSparkMax frontRight = new CANSparkMax(3, MotorType.kBrushless);
-    private final CANSparkMax rearLeft = new CANSparkMax(2, MotorType.kBrushless);
-    private final CANSparkMax rearRight = new CANSparkMax(1, MotorType.kBrushless);
-  
-    private final DifferentialDrive drive = new DifferentialDrive(frontLeft, frontRight);
-  
-    private final RelativeEncoder leftEncoder = frontLeft.getEncoder();
-    private final RelativeEncoder rightEncoder = frontRight.getEncoder();
-    private WPI_Pigeon2 gyro = new WPI_Pigeon2(6);
-    
-    private final XboxController controller = new XboxController(0);
-  
-    private PIDController pid = new PIDController(0.04, 0.005, 0);
-    private double distance = 0;
-    private double setpoint = 0;
-  
-    private PIDController gyroPID = new PIDController(0.04, 0.05, 0);
-  
-    private double kRevToWheel = 198/2108;
-    private double kRevToFeet = 1188 * Math.PI / 25296;
-        </code>
-    </pre>
+    <!-- Header -->
+    <div class="flex flex-row w-full fixed h-16 items-center justify-between bg-primary">
+        <a href="/index.html" class="m-2 px-4 py-2 rounded-lg"> <img class="w-8 h-8" src="/assets/images/logo_white.svg"></a>
+        <div class="flex">
+            <a href="/pages/robots.html" class="m-2 px-4 py-2 rounded-lg bg-secondary">Robots</a>
+            <a href="/pages/team.html" class="m-2 px-4 py-2 rounded-lg bg-secondary">Our Team</a>
+            <a href="https://falcons.github.io/docs" class="m-2 px-4 py-2 rounded-lg bg-secondary">Resources</a>
+            <a href="/pages/sponsors.html" class="m-2 px-4 py-2 rounded-lg bg-secondary">Sponsors</a>
+            <a href="/pages/about-frc.html" class="m-2 px-4 py-2 rounded-lg bg-secondary">About FRC</a>
+        </div>
     </div>
-    </body>
 
+    <!-- Main -->
+    <div class="bg-index gap-4 h-screen w-full bg-cover section">
+        <h1 class="text-8xl font-extrabold text-primary mt-48" style="font-family: Montserrat;">5032 Documentation</h1>
+
+        <div class="flex flex-row justify-center w-full mt-2 h-52">
+            <div class="flex flex-col items-center bg-translucent w-[15rem] m-2 p-1 border-primary border-2 rounded-md">
+                <h1 class="text-2xl font-bold text-secondary">Mechanical</h1>
+                <i class="fa-solid fa-gears fa-6x pt-6"></i>
+            </div>
+
+            <div class="flex flex-col items-center bg-translucent w-[15rem] m-2 p-1 border-primary border-2 rounded-md">
+                <h1 class="text-2xl font-bold text-secondary">Design</h1>
+                <i class="fa-solid fa-computer fa-6x pt-6"></i>
+            </div>
+
+            <div class="flex flex-col items-center bg-translucent w-[15rem] m-2 p-1 border-primary border-2 rounded-md">
+                <h1 class="text-2xl font-bold text-secondary">Business</h1>
+                <i class="fa-solid fa-book fa-6x pt-6"></i>
+            </div>
+
+            <div class="flex flex-col items-center bg-translucent w-[15rem] m-2 p-1 border-primary border-2 rounded-md" onclick="window.location='./electrical/index.html'">
+                <h1 class="text-2xl font-bold text-secondary">Electrical</h1>
+                <i class="fa-solid fa-bolt fa-6x pt-6"></i>
+            </div>
+
+            <div class="flex flex-col items-center bg-translucent w-[15rem] m-2 p-1 border-primary border-2 rounded-md" onclick="window.location='./programming/index.html'">
+                <h1 class="text-2xl font-bold text-secondary">Programming</h1>
+                <i class="fa-solid fa-code fa-6x pt-6"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function link() {
+            window.location="./programming/index.html";
+        }
+    </script>
 </body>
 </html>

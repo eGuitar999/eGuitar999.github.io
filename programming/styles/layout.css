@@ -7,12 +7,12 @@
 }
 
 .subsectionDivider{
+    margin-top: 50px;
     border-top: 5px solid #0D1D45;
     width: 5%;
 }
 
 .subsection{
-    padding-top: 50px;
     width: 100%;
 }
 

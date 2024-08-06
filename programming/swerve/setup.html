@@ -2,11 +2,11 @@
 <html>
 <head>
     <!-- Copy and paste these 3 lines to get code highlighting using language-java class, example at bottom -->
-    <link rel="stylesheet" href="/highlight/styles/default.css">
-    <script src="/highlight/highlight.min.js"></script>
+    <link rel="stylesheet" href="../highlight/styles/default.css">
+    <script src="../highlight/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
 
-    <link rel="stylesheet" href="/styles/layout.css">
+    <link rel="stylesheet" href="../styles/layout.css">
 
     <title>Swerve: Setup</title>
 </head>
@@ -15,54 +15,51 @@
     <button onclick="window.location='swerve_home.html'">Go Back</button>
     <h1>Setting up Motors and Sensors</h1>
 
-    <div class="subsection">
-        <div class="subsectionDivider"></div>
-
-        <div style="width:60%; float:left; height: auto;">
+    <div class="subsectionDivider"></div>
+    <div class="subsection" style="display: flex; padding-top: 0px;">
+        <div style="width: 100%; height:fit-content">
             <h2>1. Motors and Motor Controllers</h2>
             <p>
                 There are 4 Swerve Modules(MK4i) on the robot, each module has one motor for driving (turning wheel) and one for steering (changing wheel angle).
                 Our Swerve Drive uses 8 Spark Max Motor Controllers total, each connected to their own Neo v1.1 Motor.
             </p>
             <p>
-                Task: Initialize 8 CANSparkMax motor controller variables. 
+                <strong>Task: Initialize 8 CANSparkMax motor controller variables.</strong><br>
                 Name them in a way that tells you which module they are on, and whether they are a driving or steering motor.
-                <br>
                 Note: These are the same motors used in Ingenuity's drivetrain, initializing them is very similar
             </p>
             <button onclick="showCode('code1')">Show Code</button>
-            
+            <div id="code1" style="display: none; width: fit-content;">
+                <pre>
+                    <code class="language-java code_block">
+        import com.revrobotics.CANSparkMax;
+        import com.revrobotics.CANSparkLowLevel.MotorType;
+        
+        public class Robot extends TimedRobot {
+        private final CANSparkMax backLeftS = new CANSparkMax(1, MotorType.kBrushless);
+        private final CANSparkMax backLeftD = new CANSparkMax(2, MotorType.kBrushless);
+        private final CANSparkMax frontLeftS = new CANSparkMax(3, MotorType.kBrushless);
+        private final CANSparkMax frontLeftD = new CANSparkMax(4, MotorType.kBrushless);
+        private final CANSparkMax backRightD = new CANSparkMax(5, MotorType.kBrushless);
+        private final CANSparkMax backRightS = new CANSparkMax(6, MotorType.kBrushless);
+        private final CANSparkMax frontRightD = new CANSparkMax(7, MotorType.kBrushless);
+        private final CANSparkMax frontRightS = new CANSparkMax(8, MotorType.kBrushless);
+                    </code>
+                </pre>
+            </div>
         </div >
 
-        <div style="width:40%; margin-left: 60%; height:200px">
-            <img src="/images/swerve/setup/spark_max.webp" width="150px">
-            <img src="/images/swerve/setup/neo_motor.webp" width="150px">
-            <img src="/images/swerve/setup/swerve_module.png" width="150px">
+        <div style="width:40%; height:fit-content">
+            <img src="../images/swerve/setup/spark_max.webp" width="150px" title="Spark Max Motor Controller">
+            <img src="../images/swerve/setup/neo_motor.webp" width="150px" title="Neo v1.1 Motor">
+            <img src="../images/swerve/setup/swerve_module.png" width="150px" title="MK4i Swerve Module">
         </div>
-        
+
     </div>
     <br>
-    <div id="code1" style="display: none;">
-        <pre>
-            <code class="language-java code_block">
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkLowLevel.MotorType;
-
-public class Robot extends TimedRobot {
-private final CANSparkMax backLeftS = new CANSparkMax(1, MotorType.kBrushless);
-private final CANSparkMax backLeftD = new CANSparkMax(2, MotorType.kBrushless);
-private final CANSparkMax frontLeftS = new CANSparkMax(3, MotorType.kBrushless);
-private final CANSparkMax frontLeftD = new CANSparkMax(4, MotorType.kBrushless);
-private final CANSparkMax backRightD = new CANSparkMax(5, MotorType.kBrushless);
-private final CANSparkMax backRightS = new CANSparkMax(6, MotorType.kBrushless);
-private final CANSparkMax frontRightD = new CANSparkMax(7, MotorType.kBrushless);
-private final CANSparkMax frontRightS = new CANSparkMax(8, MotorType.kBrushless);
-            </code>
-        </pre>
-    </div>
-
+    
+    <div class="subsectionDivider"></div>
     <div class="subsection">
-        <div class="subsectionDivider"></div>
         <h2>2. Encoders</h2>
 
         <p>
@@ -223,21 +220,22 @@ backRightSEncoder.setVelocityConversionFactor(turningMotorRPMToDegreePerSecond);
         <button onclick="showCode('code4')">Show Code</button>
         <div id="code4" style="display: none;">
             <pre><code class="code_block">
-public  final double neoFreeSpeedRPM = 5820;
-public  final double maxDriveSpeedMPS = neoFreeSpeedRPM * driveRPMToMetresPerSecond;
+public final double neoFreeSpeedRPM = 5820;
+public final double maxDriveSpeedMPS = neoFreeSpeedRPM * driveRPMToMetresPerSecond;
 
-public  final double kTrackwidth = Units.inchesToMeters(23.75);
+public final double kTrackwidth = Units.inchesToMeters(23.75);
 private final double rotDiameter = Math.sqrt(2 * kTrackwidth * kTrackwidth);
 private final double rotCircumference = rotDiameter * Math.PI;
 private final double secondsForOneRot = rotCircumference / maxDriveSpeedMPS;
-public  final double maxAngularSpeedRotPerSecond = 1.0 / secondsForOneRot;
-public  final double maxAngularSpeedRadiansPerSecond = maxAngularSpeedRotPerSecond * 2 * Math.PI;
+public final double maxAngularSpeedRotPerSecond = 1.0 / secondsForOneRot;
+public final double maxAngularSpeedRadiansPerSecond = maxAngularSpeedRotPerSecond * 2 * Math.PI;
             </code></pre>
         </div>
     </div>
 
+    <div class="subsectionDivider"></div>
     <div class="subsection">
-        <div class="subsectionDivider"></div>
+        
         <h2>3. Gyro</h2>
 
         <p>
@@ -254,8 +252,8 @@ public  final double maxAngularSpeedRadiansPerSecond = maxAngularSpeedRotPerSeco
         </p>
     </div>
     
-    <button onclick="showCode('code3')">Show Code</button>
-    <div id="code3" style="display: none;">
+    <button onclick="showCode('code5')">Show Code</button>
+    <div id="code5" style="display: none;">
         <pre>
             <code class="code_block">
 import com.ctre.phoenix6.hardware.Pigeon2;
