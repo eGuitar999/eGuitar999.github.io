@@ -4,6 +4,6 @@
 
 @layer components {
     .section {
-        @apply flex flex-col justify-start items-center;
+        @apply flex flex-col justify-center items-center;
     }
 }
