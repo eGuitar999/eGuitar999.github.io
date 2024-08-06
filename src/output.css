@@ -613,6 +613,14 @@ video {
   width: 100%;
 }
 
+.w-1\/6 {
+  width: 16.666667%;
+}
+
+.w-\[15rem\] {
+  width: 15rem;
+}
+
 .flex-row {
   flex-direction: row;
 }
@@ -654,6 +662,11 @@ video {
   border-color: rgb(13 29 69 / var(--tw-border-opacity));
 }
 
+.border-blue-700 {
+  --tw-border-opacity: 1;
+  border-color: rgb(29 78 216 / var(--tw-border-opacity));
+}
+
 .bg-primary {
   --tw-bg-opacity: 1;
   background-color: rgb(13 29 69 / var(--tw-bg-opacity));
@@ -670,6 +683,10 @@ video {
 
 .bg-index {
   background-image: linear-gradient(to top, rgba(60, 60, 60, 1), rgba(243, 244, 246, 0.5)), url(/assets/images/robot_close.png);
+}
+
+.bg-translucent {
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
 }
 
 .bg-cover {
